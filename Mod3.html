@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IT Law and Ethics - Module 3 Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .question {
+      background: #fff;
+      margin-bottom: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+    .options label {
+      display: block;
+      margin: 8px 0;
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+    .options input[type="radio"] {
+      margin-right: 8px;
+    }
+    .options label:hover {
+      background: #eee;
+    }
+    .correct {
+      color: green;
+      font-weight: bold;
+      background: #d4edda;
+    }
+    .wrong {
+      color: red;
+      font-weight: bold;
+      background: #f8d7da;
+    }
+    button {
+      display: block;
+      margin: 30px auto;
+      padding: 12px 30px;
+      font-size: 18px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:disabled {
+      background: #6c757d;
+      cursor: not-allowed;
+    }
+    button:hover:not(:disabled) {
+      background: #0056b3;
+    }
+    .result {
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>IT Law and Ethics - Module 3 Quiz</h1>
+
+  <form id="quizForm"></form>
+
+  <button id="submitBtn">Submit</button>
+
+  <div id="result" class="result"></div>
+
+  <script>
+    const quizData = [
+      {question: "1. What is Intellectual Property?", options: {a: "Physical assets owned by a person", b: "Creations of the mind such as inventions, literary and artistic works", c: "Land and buildings", d: "Money in the bank"}, answer: "b"},
+      {question: "2. Which of the following is NOT a type of Intellectual Property?", options: {a: "Patent", b: "Trademark", c: "Copyright", d: "Lease Agreement"}, answer: "d"},
+      {question: "3. What does a patent protect?", options: {a: "Inventions and processes", b: "Company logos", c: "Books and music", d: "Secret recipes"}, answer: "a"},
+      {question: "4. Which law governs copyright in India?", options: {a: "Patents Act", b: "Trade Marks Act", c: "Copyright Act", d: "Information Technology Act"}, answer: "c"},
+      {question: "5. The term 'Trademark' refers to:", options: {a: "A distinctive sign identifying goods or services", b: "An invention", c: "A secret business method", d: "A copyrighted book"}, answer: "a"},
+      {question: "6. Which body in India is responsible for granting patents?", options: {a: "Controller General of Patents, Designs & Trade Marks", b: "Ministry of Finance", c: "Supreme Court", d: "Registrar of Companies"}, answer: "a"},
+      {question: "7. How long is the term of protection for a copyright in India?", options: {a: "25 years", b: "50 years after the author's death", c: "60 years after the author's death", d: "Lifetime of the author"}, answer: "c"},
+      {question: "8. Which of the following is protected under the Trademark Act?", options: {a: "Inventions", b: "Logos and brand names", c: "Literary works", d: "Secret formulas"}, answer: "b"},
+      {question: "9. The term 'Geographical Indications' protect:", options: {a: "Patents", b: "Trademarks", c: "Products originating from a specific geographical location", d: "Copyrights"}, answer: "c"},
+      {question: "10. The IT Act, 2000 primarily deals with:", options: {a: "Taxation laws", b: "Information Technology and electronic commerce", c: "Environmental laws", d: "Labour laws"}, answer: "b"},
+      {question: "11. The term 'Cybercrime' refers to:", options: {a: "Crimes related to computers and internet", b: "Crimes related to physical theft", c: "Crimes against the government", d: "Crimes related to environmental pollution"}, answer: "a"},
+      {question: "12. The maximum penalty for a failure to protect sensitive personal data under the IT Act is:", options: {a: "1 lakh rupees", b: "5 lakh rupees", c: "10 lakh rupees", d: "No penalty"}, answer: "c"},
+      {question: "13. Which section of the IT Act covers punishment for hacking?", options: {a: "Section 43", b: "Section 66", c: "Section 70", d: "Section 79"}, answer: "b"},
+      {question: "14. The term 'Digital Signature' means:", options: {a: "An electronic equivalent of a handwritten signature", b: "A biometric scan", c: "Password to access email", d: "Barcode on a product"}, answer: "a"},
+      {question: "15. Which agency certifies digital signatures in India?", options: {a: "Ministry of IT", b: "Controller of Certifying Authorities (CCA)", c: "Cyber Crime Police", d: "Indian Patent Office"}, answer: "b"},
+      {question: "16. Cyberstalking is punishable under which law?", options: {a: "IT Act", b: "IPC Section 354D", c: "IPC Section 420", d: "Copyright Act"}, answer: "b"},
+      {question: "17. Which of the following is NOT a type of cybercrime?", options: {a: "Phishing", b: "Hacking", c: "Money laundering", d: "Land grabbing"}, answer: "d"},
+      {question: "18. Which section of the IPC deals with defamation?", options: {a: "Section 499", b: "Section 420", c: "Section 66", d: "Section 354D"}, answer: "a"},
+      {question: "19. E-Commerce regulations in India are governed mainly by:", options: {a: "IT Act, 2000", b: "Consumer Protection Act, 2019", c: "Both a and b", d: "Companies Act, 2013"}, answer: "c"},
+      {question: "20. The term 'Phishing' refers to:", options: {a: "Sending fake emails to steal information", b: "Writing malware", c: "Physical theft", d: "Unauthorized downloading"}, answer: "a"},
+      {question: "21. The Information Technology Act was enacted in the year:", options: {a: "1998", b: "2000", c: "2005", d: "2010"}, answer: "b"},
+      {question: "22. Which of the following is NOT a valid electronic record?", options: {a: "Email", b: "Scanned copy of handwritten letter", c: "Digital photograph", d: "Handwritten letter"}, answer: "d"},
+      {question: "23. Under the IT Act, the term 'intermediary' includes:", options: {a: "Internet service providers", b: "Network service providers", c: "Web-hosting service providers", d: "All of the above"}, answer: "d"},
+      {question: "24. Which section provides immunity to intermediaries in the IT Act?", options: {a: "Section 79", b: "Section 66", c: "Section 43", d: "Section 70"}, answer: "a"},
+      {question: "25. 'Data Protection' laws in India currently fall under:", options: {a: "IT Act", b: "Draft Personal Data Protection Bill", c: "Consumer Protection Act", d: "None"}, answer: "b"},
+      {question: "26. The concept of 'Fair Use' is related to:", options: {a: "Patents", b: "Copyrights", c: "Trademarks", d: "Designs"}, answer: "b"},
+      {question: "27. Which Indian law primarily deals with patents?", options: {a: "Trade Marks Act", b: "Patents Act, 1970", c: "Copyright Act", d: "Information Technology Act"}, answer: "b"},
+      {question: "28. The penalty for identity theft under IT Act can be imprisonment up to:", options: {a: "1 year", b: "3 years", c: "5 years", d: "7 years"}, answer: "c"},
+      {question: "29. The term 'Trade Secret' means:", options: {a: "A registered trademark", b: "Confidential business information providing competitive advantage", c: "Patented invention", d: "Publicly available knowledge"}, answer: "b"},
+      {question: "30. The Indian Evidence Act includes provisions for:", options: {a: "Admissibility of electronic records", b: "Patent protection", c: "Trademark registration", d: "Digital signatures"}, answer: "a"},
+      {question: "31. 'Cyber Terrorism' is defined under which section of IT Act?", options: {a: "Section 66F", b: "Section 70", c: "Section 43", d: "Section 79"}, answer: "a"},
+      {question: "32. Which Act governs E-Commerce contracts in India?", options: {a: "Indian Contract Act", b: "Consumer Protection Act", c: "Information Technology Act", d: "Companies Act"}, answer: "a"},
+      {question: "33. 'Software piracy' means:", options: {a: "Illegal copying or distribution of software", b: "Creating software", c: "Using open source software", d: "Developing mobile apps"}, answer: "a"},
+      {question: "34. Which of these is NOT covered under Intellectual Property Rights?", options: {a: "Patent", b: "Trademark", c: "Copyright", d: "Physical property"}, answer: "d"},
+      {question: "35. The term 'Plagiarism' means:", options: {a: "Copying someone else's work without permission", b: "Creating original work", c: "Registering a patent", d: "Trademark infringement"}, answer: "a"},
+      {question: "36. Digital signatures are based on:", options: {a: "Asymmetric cryptography", b: "Symmetric cryptography", c: "Plain text passwords", d: "None of the above"}, answer: "a"},
+      {question: "37. The law that deals with protection of designs is called:", options: {a: "Designs Act", b: "Patent Act", c: "Trademark Act", d: "Copyright Act"}, answer: "a"},
+      {question: "38. The term 'Computer Virus' refers to:", options: {a: "A harmful program that spreads by infecting other programs", b: "A hardware malfunction", c: "An error in software", d: "A backup file"}, answer: "a"},
+      {question: "39. The Consumer Protection Act, 2019, includes provisions for:", options: {a: "E-Commerce consumer rights", b: "Patents", c: "Trademark registration", d: "Copyright infringement"}, answer: "a"},
+      {question: "40. Which of the following is NOT a cyber offense under IT Act?", options: {a: "Hacking", b: "Spreading viruses", c: "Forgery", d: "Physical assault"}, answer: "d"},
+      {question: "41. The term 'E-Governance' means:", options: {a: "Use of ICT by government to provide services", b: "Use of paper-based communication", c: "Traditional government processes", d: "None of these"}, answer: "a"},
+      {question: "42. The penalty for publishing obscene material electronically is:", options: {a: "Fine", b: "Imprisonment up to 3 years", c: "Both fine and imprisonment", d: "No penalty"}, answer: "c"},
+      {question: "43. The Indian Copyright Act protects:", options: {a: "Literary and artistic works", b: "Industrial designs", c: "Trademarks", d: "Patents"}, answer: "a"},
+      {question: "44. The term 'Open Source Software' means:", options: {a: "Software whose source code is publicly available", b: "Proprietary software", c: "Illegal software", d: "Software without any license"}, answer: "a"},
+      {question: "45. Which section of the IT Act provides for protection of sensitive personal data?", options: {a: "Section 43A", b: "Section 66", c: "Section 79", d: "Section 43"}, answer: "a"},
+      {question: "46. The Indian Patent Act allows patent protection for:", options: {a: "New inventions", b: "Discoveries", c: "Scientific theories", d: "Mathematical methods"}, answer: "a"},
+      {question: "47. The Cyber Appellate Tribunal was established under which act?", options: {a: "IT Act, 2000", b: "Patent Act", c: "Trademark Act", d: "Copyright Act"}, answer: "a"},
+      {question: "48. 'Hacking' under the IT Act means:", options: {a: "Unauthorized access to computer system", b: "Software development", c: "Digital marketing", d: "Online shopping"}, answer: "a"},
+      {question: "49. The Information Technology Act was amended in the year:", options: {a: "2008", b: "2005", c: "2010", d: "2015"}, answer: "a"},
+      {question: "50. Which of the following is NOT true about trademarks?", options: {a: "They identify the source of goods", b: "They can be words or symbols", c: "They protect inventions", d: "They can be registered"}, answer: "c"},
+      {question: "51. Which section of IPC deals with cheating?", options: {a: "Section 420", b: "Section 499", c: "Section 66", d: "Section 354D"}, answer: "a"},
+      {question: "52. Cyber bullying is punishable under:", options: {a: "IT Act and IPC", b: "Patent Act", c: "Trade Marks Act", d: "Copyright Act"}, answer: "a"},
+      {question: "53. The term 'Digital Forensics' means:", options: {a: "Investigation of cybercrimes using digital tools", b: "Software programming", c: "Creating digital art", d: "Online teaching"}, answer: "a"},
+      {question: "54. Which of the following is NOT protected by copyright?", options: {a: "Ideas", b: "Books", c: "Music", d: "Films"}, answer: "a"},
+      {question: "55. The term 'License' in Intellectual Property means:", options: {a: "Permission to use IP", b: "Ownership of IP", c: "A type of patent", d: "Trademark registration"}, answer: "a"},
+      {question: "56. Which section of IT Act provides for compensation for failure to protect data?", options: {a: "Section 43A", b: "Section 66", c: "Section 79", d: "Section 43"}, answer: "a"},
+      {question: "57. The maximum term of imprisonment for cyber terrorism is:", options: {a: "5 years", b: "7 years", c: "10 years", d: "Life imprisonment"}, answer: "d"},
+      {question: "58. The 'Right to Privacy' is protected under which law in India?", options: {a: "IT Act", b: "Constitution of India", c: "Patent Act", d: "Copyright Act"}, answer: "b"},
+      {question: "59. Cyber laws aim to:", options: {a: "Protect users and data", b: "Promote cybercrime", c: "Hinder e-commerce", d: "Limit internet use"}, answer: "a"},
+      {question: "60. The term 'Spam' means:", options: {a: "Unsolicited electronic messages", b: "Malware", c: "Hacking technique", d: "Digital signature"}, answer: "a"},
+      {question: "61. Which of these is NOT a recognized form of IP in India?", options: {a: "Trade secrets", b: "Patent", c: "Trademark", d: "Real estate"}, answer: "d"},
+      {question: "62. The Copyright Act protects works for:", options: {a: "Lifetime of author + 60 years", b: "25 years", c: "50 years", d: "Lifetime only"}, answer: "a"},
+      {question: "63. 'Infringement' means:", options: {a: "Violation of IP rights", b: "Registration of IP", c: "Legal use of IP", d: "Creation of new IP"}, answer: "a"},
+      {question: "64. Which of these is a remedy for IP infringement?", options: {a: "Injunction", b: "Patent filing", c: "Trademark registration", d: "Copyrighting"}, answer: "a"},
+      {question: "65. Cybercrime includes:", options: {a: "Identity theft", b: "Physical assault", c: "Road accidents", d: "Tax evasion"}, answer: "a"},
+      {question: "66. The term 'Phishing' relates to:", options: {a: "Deceptive emails to steal data", b: "Fishing industry", c: "Data backup", d: "Software development"}, answer: "a"},
+      {question: "67. 'Firewall' is used to:", options: {a: "Protect networks from unauthorized access", b: "Create software", c: "Store data", d: "Enhance video quality"}, answer: "a"},
+      {question: "68. Cyber laws help in:", options: {a: "Preventing cybercrimes", b: "Promoting hacking", c: "Ignoring data breaches", d: "None of the above"}, answer: "a"},
+      {question: "69. Which section deals with punishment for publishing obscene material electronically?", options: {a: "Section 67", b: "Section 43", c: "Section 66", d: "Section 79"}, answer: "a"},
+      {question: "70. The term 'Software License' means:", options: {a: "Permission to use software", b: "Ownership of software", c: "Developing software", d: "Selling software"}, answer: "a"},
+      {question: "71. Cyber terrorism involves:", options: {a: "Using internet to threaten security", b: "Computer programming", c: "Legal online transactions", d: "E-commerce activities"}, answer: "a"},
+      {question: "72. The Information Technology Act aims to:", options: {a: "Facilitate electronic governance", b: "Ban internet usage", c: "Promote cybercrime", d: "None of the above"}, answer: "a"},
+      {question: "73. Intellectual Property Rights encourage:", options: {a: "Innovation and creativity", b: "Theft and piracy", c: "Copying", d: "None"}, answer: "a"},
+      {question: "74. Which of these is an example of industrial property?", options: {a: "Patent", b: "Literary work", c: "Music", d: "Painting"}, answer: "a"},
+      {question: "75. Cyber laws regulate:", options: {a: "Online transactions and communication", b: "Physical trade", c: "Land ownership", d: "Water resources"}, answer: "a"},
+    ];
+
+    const quizForm = document.getElementById('quizForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const resultDiv = document.getElementById('result');
+
+    // Dynamically create quiz questions
+    quizData.forEach((item, index) => {
+      const questionDiv = document.createElement('div');
+      questionDiv.className = 'question';
+
+      // Question text
+      const qText = document.createElement('p');
+      qText.textContent = item.question;
+      questionDiv.appendChild(qText);
+
+      // Options
+      const optionsDiv = document.createElement('div');
+      optionsDiv.className = 'options';
+
+      for (const [key, val] of Object.entries(item.options)) {
+        const label = document.createElement('label');
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'question' + index;
+        input.value = key;
+        label.appendChild(input);
+        label.append(val);
+        optionsDiv.appendChild(label);
+      }
+
+      questionDiv.appendChild(optionsDiv);
+      quizForm.appendChild(questionDiv);
+    });
+
+    submitBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      let score = 0;
+      let total = quizData.length;
+      resultDiv.textContent = "";
+
+      // Disable submit button after submission
+      submitBtn.disabled = true;
+
+      // Check each question
+      quizData.forEach((item, index) => {
+        const selected = document.querySelector(`input[name="question${index}"]:checked`);
+
+        const questionDiv = quizForm.children[index];
+        // Clear previous classes
+        [...questionDiv.querySelectorAll('label')].forEach(label => {
+          label.classList.remove('correct', 'wrong');
+        });
+
+        if (selected) {
+          if (selected.value === item.answer) {
+            score++;
+            // Mark correct option green
+            selected.parentElement.classList.add('correct');
+          } else {
+            // Mark selected wrong option red
+            selected.parentElement.classList.add('wrong');
+            // Mark correct option green
+            const correctOption = [...questionDiv.querySelectorAll('input')].find(inp => inp.value === item.answer);
+            if (correctOption) correctOption.parentElement.classList.add('correct');
+          }
+        } else {
+          // No option selected, highlight correct option
+          const correctOption = [...questionDiv.querySelectorAll('input')].find(inp => inp.value === item.answer);
+          if (correctOption) correctOption.parentElement.classList.add('correct');
+        }
+      });
+
+      resultDiv.textContent = `You scored ${score} out of ${total}`;
+    });
+  </script>
+
+</body>
+</html>
